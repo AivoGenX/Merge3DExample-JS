@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>支持three几何体立方体展示</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./Merge3D.css" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { Merge3D } from "../Merge3D.js";
+      import * as THREE from "../three.module.js";
+      const map = new Merge3D("app");
+
+      // 添加three 中的方法
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+      const cube = new THREE.Mesh(geometry, material);
+      map.add(cube);
+      // 中心点
+      map.setCenter([0, 0, 10]);
+    </script>
+  </body>
+</html>

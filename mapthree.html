@@ -1,0 +1,65 @@
+<!--
+ * @author: cyc
+ * @copyright: 
+ * @see: 
+ * @version: 
+ * @tutorial: 
+ * @since: 
+ * @summary: 
+ * @file: 
+ * @license: 
+ * @Date: 2024-02-29 15:57:25
+ * @LastEditTime: 2025-03-12 13:41:25
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>影像地图</title>
+    <script src="./lib/proj4/proj4.js"></script>
+    <script src="./lib/Cesium/Cesium.js"></script>
+    <link rel="stylesheet" type="text/css" href="./Merge3D.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./lib/Cesium/Widgets/widgets.css"
+    />
+  </head>
+
+  <body>
+    <div>
+      <div id="app" class="app">
+        <div id="cesiumContainer" class="cesiumContainer"></div>
+      </div>
+    </div>
+    <script type="module">
+      import { Merge3D, PointCloudLayer, cesiumThree } from "./Merge3D.js";
+      import * as THREE from "./three.module.js";
+      // 初始化场景
+      let map = new Merge3D("app");
+      let viewer = map.viewer;
+      // 初始化地图
+      let ct = new cesiumThree({
+        renderer: viewer.renderer,
+        viewer: map.viewer,
+      });
+      let cesiumViewer = ct.cesiumViewer;
+      let scene = viewer.scene;
+      // 定位
+      scene.view.setView(
+        [776207.483001709, 2935355.205001831, 1078.97],
+        [776207.483001709, 2935355.20500183, 82.04]
+      ); 
+    
+      // 添加three 中的方法
+      const geometry = new THREE.BoxGeometry(100, 100, 100);
+      const material = new THREE.MeshPhongMaterial({ color: 0x00ffff });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.set(776207.483001709, 2935355.205001831, 50); 
+      map.add(cube);
+   
+    </script>
+  </body>
+</html>
